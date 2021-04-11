@@ -1,0 +1,38 @@
+---
+title: "An Example Run for MoMPCA"
+author: "Anonymous Author(s)"
+date: "11 February 2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Load the libraries required and load the file, "functions.R", which contains the MoMPCA frunction.
+```{r}
+library(RSpectra)
+library(pracma)
+source('function.R')
+```
+Load the data as follows. 
+```{r}
+X=read.csv('motivating_example.csv')
+X=data.matrix(X)
+```
+Run the MoMPCA function to find the first principal component. We take $L=25$.
+```{r}
+l=MoMPCA(X,L=25,d=1,eta=0.0001,tmax=100,verbose=1)
+```
+We plot the scatter plot of the data along the PC1 for MoMPCA (colored in blue) and classical PCA (colored in red) in Figure 1. Even in the presence of only 1% outlying observations, the classical PCA can render spurious results while MoM PCA finds the direction of maximum variation efficiently.
+```{r, echo=FALSE}
+S=t(X)%*%X
+res=eigen(S)
+V1=res$vectors[,1]
+plot(X,xlab='Feature 1', ylab='Feature 2', main='Figure 1: MoMPCA vs. Classical PCA')
+abline(0,l$V[2]/l$V[1],col='blue')
+abline(0,V1[2]/V1[1],col='red')
+```
+ 
+ 
