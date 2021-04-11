@@ -1,7 +1,7 @@
 ---
 title: "An Example Run for MoMPCA"
-author: "Anonymous Author(s)"
-date: "11 February 2021"
+author: "Debolina Paul, Saptarshi Chakraborty and Swagatam Das"
+date: "11 April 2021"
 output: pdf_document
 ---
 
